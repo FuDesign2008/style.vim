@@ -88,12 +88,12 @@ if !exists('g:style_type')
 endif
 
 if g:style_type == 'loose'
-    call s:LooseStyle()
+    call s:LooseStyle(0)
 elseif g:style_type == 'node'
-    call s:NodeStyle()
+    call s:NodeStyle(0)
 else
     "the default
-    call s:StrictStyle()
+    call s:StrictStyle(0)
 endif
 
 
