@@ -54,17 +54,17 @@ endfunction
 let s:strip_on_save = 1
 autocmd BufWritePre *  call s:StripIfEnabled()
 
-function! LooseStyle()
+function! s:LooseStyle()
     call s:TabWidth(4, 0)
     let s:strip_on_save = 0
 endfunction
 
-function! StrictStyle()
+function! s:StrictStyle()
     call s:TabWidth(4, 1)
     let s:strip_on_save = 1
 endfunction
 
-function! NodeStyle()
+function! s:NodeStyle()
     call s:TabWidth(2, 1)
     let s:strip_on_save = 1
 endfunction
