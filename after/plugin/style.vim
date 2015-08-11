@@ -67,6 +67,7 @@ function! s:SetStrip(bufferScope, value)
     if a:bufferScope
         let b:strip_on_save = a:value
     else
+        let b:strip_on_save = a:value
         let s:strip_on_save = a:value
     endif
 endfunction
