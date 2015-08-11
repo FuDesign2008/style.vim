@@ -75,7 +75,7 @@ endif
 
 if g:style_type == 'loose'
     call s:LooseStyle()
-elseif g:style_type = 'node'
+elseif g:style_type == 'node'
     call s:NodeStyle()
 else
     "the default
