@@ -11,15 +11,21 @@ let g:style_loaded = 1
 let s:save_cpo = &cpo
 set cpo&vim
 
-function! s:TabWidth(width, expand)
-    execute "set tabstop=" . a:width
-    execute "set softtabstop=" . a:width
-    execute "set shiftwidth=" . a:width
+function! s:TabWidth(bufferScope, width, expand)
+
+    let theSet = 'set'
+    if a:bufferScope
+        let theSet = 'setlocal'
+    endif
+
+    execute theSet . " tabstop=" . a:width
+    execute theSet . " softtabstop=" . a:width
+    execute theSet . " shiftwidth=" . a:width
 
     if a:expand
-        set expandtab
+        execute theSet . ' expandtab'
     else
-        set noexpandtab
+        execute theSet . ' noexpandtab'
     endif
 endfunction
 
@@ -46,27 +52,35 @@ function! s:StripWhitespace()
 endfunction
 
 function! s:StripIfEnabled()
-    if s:strip_on_save
+    if (exists('b:strip_on_save') && b:strip_on_save) || s:strip_on_save
         call s:StripWhitespace()
+    endif
+endfunction
+
+function! s:SetStrip(bufferScope, value)
+    if a:bufferScope
+        let b:strip_on_save = a:value
+    else
+        let s:strip_on_save = a:value
     endif
 endfunction
 
 let s:strip_on_save = 1
 autocmd BufWritePre *  call s:StripIfEnabled()
 
-function! s:LooseStyle()
-    call s:TabWidth(4, 0)
-    let s:strip_on_save = 0
+function! s:LooseStyle(bufferScope)
+    call s:TabWidth(a:bufferScope, 4, 0)
+    call s:SetStrip(a:bufferScope, 0)
 endfunction
 
-function! s:StrictStyle()
-    call s:TabWidth(4, 1)
-    let s:strip_on_save = 1
+function! s:StrictStyle(bufferScope)
+    call s:TabWidth(a:bufferScope, 4, 1)
+    call s:SetStrip(a:bufferScope, 1)
 endfunction
 
-function! s:NodeStyle()
-    call s:TabWidth(2, 1)
-    let s:strip_on_save = 1
+function! s:NodeStyle(bufferScope)
+    call s:TabWidth(a:bufferScope, 2, 1)
+    call s:SetStrip(a:bufferScope, 1)
 endfunction
 
 if !exists('g:style_type')
@@ -83,9 +97,12 @@ else
 endif
 
 
+command! LooseStyle call s:LooseStyle(0)
+command! StrictStyle call s:StrictStyle(0)
+command! NodeStyle call s:NodeStyle(0)
 
-command! LooseStyle call s:LooseStyle()
-command! StrictStyle call s:StrictStyle()
-command! NodeStyle call s:NodeStyle()
+command! LooseStyleLocal call s:LooseStyle(1)
+command! StrictStyleLocal call s:StrictStyle(1)
+command! NodeStyleLocal call s:NodeStyle(1)
 
 let &cpo = s:save_cpo
