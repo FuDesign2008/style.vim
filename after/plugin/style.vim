@@ -52,7 +52,13 @@ function! s:StripWhitespace()
 endfunction
 
 function! s:StripIfEnabled()
-    if (exists('b:strip_on_save') && b:strip_on_save) || s:strip_on_save
+    if exists('b:strip_on_save')
+        if b:strip_on_save
+            call s:StripWhitespace()
+        endif
+        return
+    endif
+    if s:strip_on_save
         call s:StripWhitespace()
     endif
 endfunction
