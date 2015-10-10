@@ -103,18 +103,6 @@ else
     call s:StrictStyle(0)
 endif
 
-function! s:isNode()
-    let shebang = getline(1)
-    if shebang =~# '^#!.*/bin/env\s\+node\>'
-        return 1
-    endif
-
-    if shebang =~# '^#!.*/bin/node\>'
-        return 1
-    endif
-
-    return 0
-endfunction
 
 
 command! LooseStyle call s:LooseStyle(0)
@@ -125,8 +113,5 @@ command! LooseStyleLocal call s:LooseStyle(1)
 command! StrictStyleLocal call s:StrictStyle(1)
 command! NodeStyleLocal call s:NodeStyle(1)
 
-if s:isNode()
-    call s:NodeStyleLocal(1)
-endif
 
 let &cpo = s:save_cpo
