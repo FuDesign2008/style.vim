@@ -23,7 +23,5 @@ Code/text style switcher
 Available values:
 
 * `loose`
-* `strict`, the default
+* `strict`, the default value
 * `node`
-
-
