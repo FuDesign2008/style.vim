@@ -1,9 +1,8 @@
 # style.vim
+
 Code/text style switcher
 
-
-
-## Usage
+## Commands
 
 1. `:LooseStyle`
     * tab width = 4
@@ -17,9 +16,7 @@ Code/text style switcher
     * use spaces instead tabs for indention
     * strip trailing whitespaces on save
 
-
-
-## Options
+## Configuration
 
 ### `g:style_type`
 
