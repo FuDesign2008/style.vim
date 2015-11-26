@@ -1,9 +1,8 @@
 # style.vim
+
 Code/text style switcher
 
-
-
-## Usage
+## Commands
 
 1. `:LooseStyle`
     * tab width = 4
@@ -18,8 +17,7 @@ Code/text style switcher
     * strip trailing whitespaces on save
 
 
-
-## Options
+## Configuration
 
 ### `g:style_type`
 
