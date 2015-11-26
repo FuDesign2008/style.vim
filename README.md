@@ -16,7 +16,6 @@ Code/text style switcher
     * use spaces instead tabs for indention
     * strip trailing whitespaces on save
 
-
 ## Configuration
 
 ### `g:style_type`
